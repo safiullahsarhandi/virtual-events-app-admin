@@ -11,6 +11,7 @@ import Profile from "./Screens/Profile/Profile";
 import ChangePassword from "./Screens/Profile/ChangePassword";
 import UserLog from "./Screens/User/UserLog";
 import UserDetails from "./Screens/User/UserDetails";
+import SubscriptionLog from "./Screens/Subscription/SubscriptionLog";
 
 export default function Router() {
   return (
@@ -55,6 +56,14 @@ export default function Router() {
           element={
             <PrivateRoutes title="User">
               <UserDetails />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/subscription/logs"
+          element={
+            <PrivateRoutes title="Subscription">
+              <SubscriptionLog />
             </PrivateRoutes>
           }
         />
