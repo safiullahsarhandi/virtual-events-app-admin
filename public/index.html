@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <base href="%PUBLIC_URL%/could-you-tell" target="_blank" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -10,34 +11,77 @@
       content="Web site created using create-react-app"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <title>Could You Tell | Admin</title>
+    <link rel="shortcut icon" href="./images/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" /> -->
+    <!-- BEGIN VENDOR CSS-->
+    <link rel="stylesheet" href="%PUBLIC_URL%/app-assets/css/vendors.css" />
+    <!-- END VENDOR CSS-->
+    <!-- BEGIN STACK CSS-->
+    <link rel="stylesheet" href="%PUBLIC_URL%/app-assets/css/app.css" />
+    <!-- END STACK CSS-->
+    <!-- BEGIN Page Level CSS-->
+    <link
+      rel="stylesheet"
+      href="%PUBLIC_URL%/app-assets/css/core/menu/menu-types/vertical-menu.css"
+    />
+    <!-- END Page Level CSS-->
+    <link
+      rel="stylesheet"
+      href="%PUBLIC_URL%/app-assets/css/plugins/calendars/fullcalendar.css"
+    />
+    <link
+      rel="stylesheet"
+      href="%PUBLIC_URL%/app-assets/vendors/css/calendars/fullcalendar.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- BEGIN Custom CSS-->
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/style.css" />
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/responsive.css" />
+    <link
+      rel="stylesheet"
+      href="%PUBLIC_URL%/assets/css/jquery.mCustomScrollbar.css"
+    />
+    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/CustomScrollbar.css" />
+    <!-- END Custom CSS-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body
+    class="vertical-layout vertical-menu 2-columns fixed-navbar menu-expanded pace-done"
+  >
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
+
+  <script defer src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script
+    defer
+    src="%PUBLIC_URL%/app-assets/vendors/js/vendors.min.js"
+  ></script>
+  <script defer src="%PUBLIC_URL%/app-assets/js/core/app-menu.js"></script>
+  <script defer src="%PUBLIC_URL%/app-assets/js/core/app.js"></script>
+  <script defer src="%PUBLIC_URL%/app-assets/js/scripts/customizer.js"></script>
+  <script defer src="%PUBLIC_URL%/assets/js/jquery.repeater.min.js"></script>
+  <script defer src="%PUBLIC_URL%/assets/js/form-repeater.js"></script>
+  <script defer src="%PUBLIC_URL%/assets/js/function.js"></script>
 </html>
