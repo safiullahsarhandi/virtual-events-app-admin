@@ -6,47 +6,73 @@ export default function Sidebar() {
   const menu = useRef([
     {
       name: "Dashboard",
-      image: <i class="fas fa-chart-area"></i>,
+      image: <img src="images/dashboard.png" alt="" class="img-fluid mr-1" />,
       link: "/dashboard",
     },
     {
       name: "Users",
-      image: <i class="fas fa-user"></i>,
+      image: <img src="images/user-nav.png" alt="" class="img-fluid mr-1" />,
       link: "/user/logs",
     },
     {
-      name: "Properties",
-      image: <i class="fas fa-building"></i>,
+      name: "Events",
+      image: <img src="images/events.png" alt="" class="img-fluid mr-1" />,
       link: "/property/logs",
     },
     {
-      name: "Category",
-      image: <i class="fas fa-comments"></i>,
+      name: "Event Categories",
+      image: (
+        <img src="images/event-categories.png" alt="" class="img-fluid mr-1" />
+      ),
       link: "/category/logs",
     },
     {
-      name: "Payments",
-      image: <i class="fas fa-credit-card"></i>,
+      name: "Event Elements",
+      image: <img src="images/elements.png" alt="" class="img-fluid mr-1" />,
       link: "/payment/logs",
     },
     {
-      name: "Packages",
-      image: <i class="fas fa-box"></i>,
+      name: "Payment Logs",
+      image: <img src="images/payment.png" alt="" class="img-fluid mr-1" />,
       link: "/package/logs",
     },
     {
-      name: "Subscription",
-      image: <i class="fas fa-user"></i>,
+      name: "Subscription Plans",
+      image: (
+        <img src="images/subscription.png" alt="" class="img-fluid mr-1" />
+      ),
       link: "/subscription/logs",
     },
     {
-      name: "Settings",
-      image: <i class="fas fa-cog"></i>,
+      name: "Stories",
+      image: <img src="images/stories.png" alt="" class="img-fluid mr-1" />,
       link: "/settings",
     },
     {
-      name: "Feedback",
-      image: <i class="far fa-calendar-check"></i>,
+      name: "Products",
+      image: <img src="images/products.png" alt="" class="img-fluid mr-1" />,
+      link: "/feedback/logs",
+    },
+    {
+      name: "Categories",
+      image: (
+        <img src="images/event-categories.png" alt="" class="img-fluid mr-1" />
+      ),
+      link: "/feedback/logs",
+    },
+    {
+      name: "Attributes",
+      image: <img src="images/attributes.png" alt="" class="img-fluid mr-1" />,
+      link: "/feedback/logs",
+    },
+    {
+      name: "Orders",
+      image: <img src="images/orders.png" alt="" class="img-fluid mr-1" />,
+      link: "/feedback/logs",
+    },
+    {
+      name: "Queries",
+      image: <img src="images/queries.png" alt="" class="img-fluid mr-1" />,
       link: "/feedback/logs",
     },
   ]);
@@ -63,14 +89,8 @@ export default function Sidebar() {
   }, [window?.location?.pathname]);
 
   return (
-    <div
-      className="main-menu menu-fixed menu-light menu-accordion"
-      data-scroll-to-active="true"
-    >
-      <div
-        className="main-menu-content ps-container ps-theme-dark"
-        data-ps-id="a3476805-034f-dce3-137e-fc05f195c4e1"
-      >
+    <div className="main-menu menu-fixed menu-light menu-accordion">
+      <div className="main-menu-content ps-container ps-theme-dark">
         <ul
           className="navigation navigation-main"
           id="main-menu-navigation"
