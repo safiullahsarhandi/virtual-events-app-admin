@@ -44,7 +44,7 @@ export default function Table({
               isFetching={isFetching}
             />
             <div className="shadow-none">
-              <div className>
+              <div className="white-div-2 p-lg-3 mt-3">
                 <div className="row mt-1">
                   <div className="dataTables_wrapper">
                     <div className="maain-tabble table-responsive">

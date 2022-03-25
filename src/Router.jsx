@@ -9,6 +9,8 @@ import Recover from "./Screens/Login/Recover";
 import Dashboard from "./Screens/Dashboard/Dashboard";
 import Profile from "./Screens/Profile/Profile";
 import ChangePassword from "./Screens/Profile/ChangePassword";
+import UserLog from "./Screens/User/UserLog";
+import UserDetails from "./Screens/User/UserDetails";
 
 export default function Router() {
   return (
@@ -37,6 +39,22 @@ export default function Router() {
           element={
             <PrivateRoutes title="Profile - Change Password">
               <ChangePassword />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/user/logs"
+          element={
+            <PrivateRoutes title="User">
+              <UserLog />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/user/details/:id"
+          element={
+            <PrivateRoutes title="User">
+              <UserDetails />
             </PrivateRoutes>
           }
         />
