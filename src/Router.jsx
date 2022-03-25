@@ -12,6 +12,10 @@ import ChangePassword from "./Screens/Profile/ChangePassword";
 import UserLog from "./Screens/User/UserLog";
 import UserDetails from "./Screens/User/UserDetails";
 import SubscriptionLog from "./Screens/Subscription/SubscriptionLog";
+import CategoryLog from "./Screens/Category/CategoryLog";
+import AddSubCategory from "./Screens/Category/AddSubCategory";
+import AddMainCategory from "./Screens/Category/AddMainCategory";
+import ViewCategory from "./Screens/Category/ViewCategory";
 
 export default function Router() {
   return (
@@ -64,6 +68,46 @@ export default function Router() {
           element={
             <PrivateRoutes title="Subscription">
               <SubscriptionLog />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/category/logs"
+          element={
+            <PrivateRoutes title="Category">
+              <CategoryLog />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/category/add/sub-category"
+          element={
+            <PrivateRoutes title="Sub Category">
+              <AddSubCategory />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/category/add/main-category"
+          element={
+            <PrivateRoutes title="Main Category">
+              <AddMainCategory />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/category/edit/main-category/:id"
+          element={
+            <PrivateRoutes title="Main Category">
+              <AddMainCategory />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/category/details/:id"
+          element={
+            <PrivateRoutes title="Category">
+              <ViewCategory />
             </PrivateRoutes>
           }
         />

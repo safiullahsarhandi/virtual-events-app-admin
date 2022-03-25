@@ -58,7 +58,7 @@ export default function Sidebar() {
       image: (
         <img src="images/event-categories.png" alt="" class="img-fluid mr-1" />
       ),
-      link: "/feedback/logs",
+      link: "/category/logs",
     },
     {
       name: "Attributes",

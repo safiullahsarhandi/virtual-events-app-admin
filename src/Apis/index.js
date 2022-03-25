@@ -5,3 +5,5 @@ export * from "./Notification";
 export * from "./User";
 export * from "./Package";
 export * from "./Subscription";
+export * from "./SubCategory";
+export * from "./Category";
