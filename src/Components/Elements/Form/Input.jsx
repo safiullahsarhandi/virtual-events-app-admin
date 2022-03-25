@@ -24,14 +24,7 @@ export default function Input({
         disabled={disabled}
         placeholder={placeholder}
       />
-      <button
-        className="btn view-btn position-absolute"
-        onClick={(e) => {
-          e.preventDefault();
-        }}
-      >
-        {endIcon ? endIcon : null}
-      </button>
+      {endIcon ? endIcon : null}
     </>
   );
 }

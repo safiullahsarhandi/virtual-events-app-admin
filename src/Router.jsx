@@ -16,6 +16,9 @@ import CategoryLog from "./Screens/Category/CategoryLog";
 import AddSubCategory from "./Screens/Category/AddSubCategory";
 import AddMainCategory from "./Screens/Category/AddMainCategory";
 import ViewCategory from "./Screens/Category/ViewCategory";
+import AttributeLog from "./Screens/Attribute/AtrributeLog";
+import AddAttribute from "./Screens/Attribute/AddAttribute";
+import ViewAttribute from "./Screens/Attribute/ViewAttribute";
 
 export default function Router() {
   return (
@@ -108,6 +111,38 @@ export default function Router() {
           element={
             <PrivateRoutes title="Category">
               <ViewCategory />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/attribute/logs"
+          element={
+            <PrivateRoutes title="Attribute">
+              <AttributeLog />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/attribute/add"
+          element={
+            <PrivateRoutes title="Attribute">
+              <AddAttribute />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/attribute/details/:id"
+          element={
+            <PrivateRoutes title="Attribute">
+              <ViewAttribute />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/attribute/edit/:id"
+          element={
+            <PrivateRoutes title="Attribute">
+              <AddAttribute />
             </PrivateRoutes>
           }
         />
