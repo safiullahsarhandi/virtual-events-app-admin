@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { getPackageLogs } from "../../Apis";
 import AppRoot from "../../Components/AppRoot";
-import Table from "../../Components/Elements/Table/Table";
 import useFetchData from "../../Hooks/useFetchData";
 import useTableControls from "../../Hooks/useTableControls";
-import { formatCurrency } from "../../Util/helpers";
 
 import AddPlanModal from "./AddPlanModal";
 
 import SubscriptionPlanCard from "./Components/SubscriptionPlanCard";
 
 export default function SubscriptionLog() {
-  const [details, setDetails] = useState({});
-
   const {
     perPage,
     setPerPage,

@@ -9,6 +9,7 @@ import Avatar from "../../Components/Elements/Icons/Avatar";
 import Error from "../../Components/Elements/Modals/Modal.Error";
 import Success from "../../Components/Elements/Modals/Modal.Success";
 import SubscriptionCard from "./Components/SubscriptionCard";
+import SubscriptionLogs from "./Components/SubscriptionLogs";
 
 export default function UserDetails() {
   const { id } = useParams();
@@ -136,7 +137,9 @@ export default function UserDetails() {
                                 </button>
                               </div>
                               <div className="col-xl-7">
-                                <SubscriptionCard subscription={{}} />
+                                <SubscriptionCard
+                                  subscription={data?.data?.user?.subscription}
+                                />
                               </div>
                             </>
                           )}
@@ -150,6 +153,7 @@ export default function UserDetails() {
                         </div>
                       </div>
                       {/* SUBSCRIPTION TABLE HERE */}
+                      <SubscriptionLogs />
                     </div>
                     <div className="white-div-2 mt-3">
                       <div className="row">
