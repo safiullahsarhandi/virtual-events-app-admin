@@ -144,3 +144,22 @@ button.btn.view-btn i {
 .swal2-icon.swal2-icon-show {
   border: none !important;
 }
+
+.tag-cstm {
+  min-width: 120px;
+  height: 45px;
+  text-align: center;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  padding: 11px 15px;
+}
+
+button.btn-close {
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: -1px;
+  right: 0;
+  width: 25px;
+  height: 25px;
+}

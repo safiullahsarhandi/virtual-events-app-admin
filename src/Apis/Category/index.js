@@ -53,3 +53,13 @@ export const getCategory = (id) =>
     method: "GET",
     headers: getAuthHeader(),
   });
+
+export const searchCategories = (searchString) =>
+  axios({
+    url: `${connection_string}/category/admin/search`,
+    method: "GET",
+    params: {
+      searchString,
+    },
+    headers: getAuthHeader(),
+  });

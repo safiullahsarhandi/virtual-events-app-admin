@@ -8,3 +8,4 @@ export * from "./Subscription";
 export * from "./SubCategory";
 export * from "./Category";
 export * from "./Attribute";
+export * from "./Product";

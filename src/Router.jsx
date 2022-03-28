@@ -19,6 +19,10 @@ import ViewCategory from "./Screens/Category/ViewCategory";
 import AttributeLog from "./Screens/Attribute/AtrributeLog";
 import AddAttribute from "./Screens/Attribute/AddAttribute";
 import ViewAttribute from "./Screens/Attribute/ViewAttribute";
+import NotFound from "./Screens/NotFound/NotFound";
+import ProductLog from "./Screens/Product/ProductLog";
+import AddProduct from "./Screens/Product/AddProduct";
+import ViewProduct from "./Screens/Product/ViewProduct";
 
 export default function Router() {
   return (
@@ -146,15 +150,47 @@ export default function Router() {
             </PrivateRoutes>
           }
         />
+        <Route
+          path="/product/logs"
+          element={
+            <PrivateRoutes title="Products">
+              <ProductLog />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/product/add"
+          element={
+            <PrivateRoutes title="Products">
+              <AddProduct />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/product/edit/:id"
+          element={
+            <PrivateRoutes title="Products">
+              <AddProduct />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/product/details/:id"
+          element={
+            <PrivateRoutes title="Products">
+              <ViewProduct />
+            </PrivateRoutes>
+          }
+        />
 
-        {/* <Route
+        <Route
           path="/*"
           element={
             <PrivateRoutes title="Not Found">
               <NotFound />
             </PrivateRoutes>
           }
-        /> */}
+        />
       </Routes>
     </>
   );

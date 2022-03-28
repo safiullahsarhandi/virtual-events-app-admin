@@ -51,7 +51,7 @@ export default function Sidebar() {
     {
       name: "Products",
       image: <img src="images/products.png" alt="" class="img-fluid mr-1" />,
-      link: "/feedback/logs",
+      link: "/product/logs",
     },
     {
       name: "Categories",

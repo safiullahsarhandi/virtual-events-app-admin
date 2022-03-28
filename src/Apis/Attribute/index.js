@@ -53,3 +53,13 @@ export const changeStatusAttribute = (id) =>
     method: "GET",
     headers: getAuthHeader(),
   });
+
+export const getMinAttributes = async (searchString) =>
+  await axios({
+    url: `${connection_string}/attribute/admin/min`,
+    method: "GET",
+    params: {
+      searchString,
+    },
+    headers: getAuthHeader(),
+  });

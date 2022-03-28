@@ -1,5 +1,5 @@
 // components/simple-dropzone.component.js
-import React, { useState } from "react";
+import React from "react";
 
 import Dropzone from "react-dropzone-uploader";
 import "react-dropzone-uploader/dist/styles.css";

@@ -15,8 +15,6 @@ function Carousel({ images }) {
   const [slider2, setSlider2] = useState(null);
   const [selected_image, setSelectedImage] = useState("");
 
-  console.log("images: ", images);
-
   useEffect(() => {
     setNav1(slider1);
     setNav2(slider2);
@@ -54,7 +52,7 @@ function Carousel({ images }) {
           >
             {images?.map((slide) => (
               <div
-                className="slick-slide"
+                className="slick-slide img-fluid w-100 product-main"
                 data-toggle="modal"
                 data-target="#lightbox"
                 onClick={() => setSelectedImage(slide)}

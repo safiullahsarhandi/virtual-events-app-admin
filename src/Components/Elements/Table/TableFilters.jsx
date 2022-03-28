@@ -73,9 +73,15 @@ export default function TableFilters({
                       }
                       endIcon={
                         isFetching ? (
-                          <Loading style={{ marginTop: -10 }} />
+                          <Loading
+                            style={{
+                              marginTop: -27,
+                              position: "absolute",
+                              right: 11,
+                            }}
+                          />
                         ) : (
-                          <Search />
+                          <Search style={{ marginTop: -5 }} />
                         )
                       }
                     />
