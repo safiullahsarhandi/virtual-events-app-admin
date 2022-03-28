@@ -3,21 +3,36 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 
-import { getProductDetails } from "../../Apis";
+import { getProductDetails, getProductReviews } from "../../Apis";
 import AppRoot from "../../Components/AppRoot";
 import { formatCurrency } from "../../Util/helpers";
 import Carousel from "../../Components/Elements/Carousel/Carousel";
 
 import { Parser } from "html-to-react";
+import useTableControls from "../../Hooks/useTableControls";
+import useFetchData from "../../Hooks/useFetchData";
+import ReviewCard from "./ReviewCard";
+import Loading from "../../Components/Elements/Icons/Loading";
+import Pagination from "../../Components/Elements/Table/Pagination";
+import ReviewAverage from "./ReviewAverage";
 
 const htmlToReactParser = new Parser();
 
 export default function ViewProduct() {
   const { id } = useParams();
+  const { perPage } = useTableControls();
 
   const { data, isLoading } = useQuery(["product", id], () =>
     getProductDetails(id)
   );
+
+  const {
+    // INTERNAL EXPORTS
+    setPage,
+    // REACT QUERY EXPORTS
+    isLoading: loadingReviews,
+    data: reviewData,
+  } = useFetchData("product_reviews", getProductReviews, [perPage, id]);
 
   return (
     <AppRoot loading={isLoading}>
@@ -75,8 +90,7 @@ export default function ViewProduct() {
                             starSpacing="0px"
                           />
                           <span className="rating ml-lg-5">
-                            {data?.data?.product.avgRatings} Ratings &amp;{" "}
-                            {data?.data?.product.rating || 0} Reviews
+                            {data?.data?.product.avgRatings} Ratings
                           </span>
                         </div>
                         <h5 className="category-abc mt-2">
@@ -168,37 +182,6 @@ export default function ViewProduct() {
                               </tr>
                             </tbody>
                           </table>
-                          <div className="row mb-4 mx-0">
-                            <div className="col-md-6">
-                              <div className="showing-result">
-                                Showing 1 to 3 of 3 entries
-                              </div>
-                            </div>
-                            <div className="col-md-6 mt-md-0 mt-3">
-                              <nav
-                                aria-label="Page navigation example"
-                                className="text-right"
-                              >
-                                <ul className="pagination justify-content-lg-end justify-content-center mt-0">
-                                  <li className="page-item">
-                                    <a className="page-link" href="#">
-                                      Previous
-                                    </a>
-                                  </li>
-                                  <li className="page-item active">
-                                    <a className="page-link" href="#">
-                                      1
-                                    </a>
-                                  </li>
-                                  <li className="page-item">
-                                    <a className="page-link" href="#">
-                                      Next
-                                    </a>
-                                  </li>
-                                </ul>
-                              </nav>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -210,65 +193,10 @@ export default function ViewProduct() {
                           Customer Rating:
                         </h3>
                         <div className="row">
-                          <div className="col-lg-6 text-center">
-                            <h5 className="number-rating">4.5</h5>
-                            <div>
-                              <i className="fas fa-star orange-star-2" />
-                              <i className="fas fa-star orange-star-2" />
-                              <i className="fas fa-star orange-star-2" />
-                              <i className="fas fa-star orange-star-2" />
-                              <i className="fas fa-star orange-star-2" />
-                            </div>
-                            <span className="rating mt-1 d-inline-block">
-                              <img
-                                src="images/user-icon.png"
-                                className="mr-1"
-                              />
-                              81 All Opinions
-                            </span>
-                          </div>
-                          <div className="col-lg-6">
-                            <span className="d-block mt-2">
-                              <i className="fas fa-star orange-star-2 mr-1" />1
-                              <img
-                                src="images/line-1.png"
-                                alt=""
-                                className="img-fluid ml-1"
-                              />
-                            </span>
-                            <span className="d-block mt-2">
-                              <i className="fas fa-star orange-star-2 mr-1" />2
-                              <img
-                                src="images/line-2.png"
-                                alt=""
-                                className="img-fluid ml-1"
-                              />
-                            </span>
-                            <span className="d-block mt-2">
-                              <i className="fas fa-star orange-star-2 mr-1" />3
-                              <img
-                                src="images/line-3.png"
-                                alt=""
-                                className="img-fluid ml-1"
-                              />
-                            </span>
-                            <span className="d-block mt-2">
-                              <i className="fas fa-star orange-star-2 mr-1" />4
-                              <img
-                                src="images/line-4.png"
-                                alt=""
-                                className="img-fluid ml-1"
-                              />
-                            </span>
-                            <span className="d-block mt-2">
-                              <i className="fas fa-star orange-star-2 mr-1" />5
-                              <img
-                                src="images/line-5.png"
-                                alt=""
-                                className="img-fluid ml-1"
-                              />
-                            </span>
-                          </div>
+                          <ReviewAverage
+                            ratings={data?.data?.ratings}
+                            avg={data?.data?.product?.avgRatings}
+                          />
                         </div>
                       </div>
                     </div>
@@ -276,83 +204,20 @@ export default function ViewProduct() {
                       <div className="white-div-2 py-lg-5 mt-3 h-100">
                         <h3 className="product-price-33 mb-2">Reviews</h3>
                         <div className="reviews-div">
-                          <div className="d-flex justify-content-between align-items-start mt-2">
-                            <div className="d-sm-flex">
-                              <img
-                                src="images/driver-profile.png"
-                                alt=""
-                                className="mr-2 review-img"
-                              />
-                              <div>
-                                <h6 className="review-name">John Doe</h6>
-                                <div>
-                                  <i className="fas fa-star orange-star-2" />
-                                  <i className="fas fa-star orange-star-2" />
-                                  <i className="fas fa-star orange-star-2" />
-                                  <i className="fas fa-star orange-star-2" />
-                                  <i className="fas fa-star orange-star-2" />
-                                  <span className="rating mt-1 d-inline-block">
-                                    4.5
-                                  </span>
-                                </div>
-                                <p className="review-para">
-                                  Lorem Ipsum is simply dummy text of the
-                                  printing and typesetting industry.
-                                </p>
-                              </div>
-                            </div>
-                            <button
-                              className="review-btn"
-                              data-toggle="modal"
-                              data-target="#delete-review"
-                              type="button"
-                            >
-                              <i className="fas fa-times" />
-                            </button>
-                          </div>
-                          <div className="d-flex justify-content-between align-items-start mt-2">
-                            <div className="d-sm-flex">
-                              <img
-                                src="images/driver-profile.png"
-                                alt=""
-                                className="mr-2 review-img"
-                              />
-                              <div>
-                                <h6 className="review-name">John Doe</h6>
-                                <div>
-                                  <i className="fas fa-star orange-star-2" />
-                                  <i className="fas fa-star orange-star-2" />
-                                  <i className="fas fa-star orange-star-2" />
-                                  <i className="fas fa-star orange-star-2" />
-                                  <i className="fas fa-star orange-star-2" />
-                                  <span className="rating mt-1 d-inline-block">
-                                    4.5
-                                  </span>
-                                </div>
-                                <p className="review-para">
-                                  Lorem Ipsum is simply dummy text of the
-                                  printing and typesetting industry.
-                                </p>
-                              </div>
-                            </div>
-                            <button
-                              className="review-btn"
-                              data-toggle="modal"
-                              data-target="#delete-review"
-                              type="button"
-                            >
-                              <i className="fas fa-times" />
-                            </button>
-                          </div>
+                          {loadingReviews && (
+                            <Loading style={{ fontSize: 32 }} />
+                          )}
+                          {reviewData?.data?.reviews?.docs?.length === 0 && (
+                            <h3>No Reviews Posted Yet!</h3>
+                          )}
+                          {reviewData?.data?.reviews?.docs?.map((review) => (
+                            <ReviewCard review={review} key={review?._id} />
+                          ))}
                         </div>
-                        <a
-                          href="#_"
-                          className="d-inline-block site-btn ml-lg-5"
-                          data-toggle="modal"
-                          data-target="#view-review"
-                        >
-                          VIEW ALL REVIEWS
-                        </a>
+                        <Pagination
+                          setPage={setPage}
+                          totalPages={reviewData?.data?.reviews?.totalPages}
+                        />
                       </div>
                     </div>
                   </div>

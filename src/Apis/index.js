@@ -9,3 +9,4 @@ export * from "./SubCategory";
 export * from "./Category";
 export * from "./Attribute";
 export * from "./Product";
+export * from "./Review";
