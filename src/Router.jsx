@@ -23,6 +23,7 @@ import NotFound from "./Screens/NotFound/NotFound";
 import ProductLog from "./Screens/Product/ProductLog";
 import AddProduct from "./Screens/Product/AddProduct";
 import ViewProduct from "./Screens/Product/ViewProduct";
+import OrderLog from "./Screens/Order/OrderLog";
 
 export default function Router() {
   return (
@@ -179,6 +180,14 @@ export default function Router() {
           element={
             <PrivateRoutes title="Products">
               <ViewProduct />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/order/logs"
+          element={
+            <PrivateRoutes title="Orders">
+              <OrderLog />
             </PrivateRoutes>
           }
         />

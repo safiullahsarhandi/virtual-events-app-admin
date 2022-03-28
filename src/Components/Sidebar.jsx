@@ -68,7 +68,7 @@ export default function Sidebar() {
     {
       name: "Orders",
       image: <img src="images/orders.png" alt="" class="img-fluid mr-1" />,
-      link: "/feedback/logs",
+      link: "/order/logs",
     },
     {
       name: "Queries",
