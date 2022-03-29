@@ -26,6 +26,8 @@ import ViewProduct from "./Screens/Product/ViewProduct";
 import OrderLog from "./Screens/Order/OrderLog";
 import ViewOrder from "./Screens/Order/ViewOrder";
 import PaymentLog from "./Screens/Payment/PaymentLog";
+import FeedbackLogs from "./Screens/Feedback/FeedbackLogs";
+import FeedbackDetails from "./Screens/Feedback/FeedbackDetails";
 
 export default function Router() {
   return (
@@ -206,6 +208,22 @@ export default function Router() {
           element={
             <PrivateRoutes title="Payment">
               <PaymentLog />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/feedback/logs"
+          element={
+            <PrivateRoutes title="Feedback">
+              <FeedbackLogs />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/feedback/details/:id"
+          element={
+            <PrivateRoutes title="Feedback">
+              <FeedbackDetails />
             </PrivateRoutes>
           }
         />
