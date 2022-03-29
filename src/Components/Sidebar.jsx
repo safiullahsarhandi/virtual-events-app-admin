@@ -49,6 +49,11 @@ export default function Sidebar() {
       link: "/settings",
     },
     {
+      name: "Story Categories",
+      image: <img src="images/stories.png" alt="" class="img-fluid mr-1" />,
+      link: "/story-category/logs",
+    },
+    {
       name: "Products",
       image: <img src="images/products.png" alt="" class="img-fluid mr-1" />,
       link: "/product/logs",

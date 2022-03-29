@@ -28,6 +28,8 @@ import ViewOrder from "./Screens/Order/ViewOrder";
 import PaymentLog from "./Screens/Payment/PaymentLog";
 import FeedbackLogs from "./Screens/Feedback/FeedbackLogs";
 import FeedbackDetails from "./Screens/Feedback/FeedbackDetails";
+import StoryCategoryLog from "./Screens/StoryCategory/StoryCategoryLog";
+import AddStoryCategory from "./Screens/StoryCategory/AddStoryCategory";
 
 export default function Router() {
   return (
@@ -224,6 +226,30 @@ export default function Router() {
           element={
             <PrivateRoutes title="Feedback">
               <FeedbackDetails />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/story-category/logs"
+          element={
+            <PrivateRoutes title="Story Category">
+              <StoryCategoryLog />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/story-category/add"
+          element={
+            <PrivateRoutes title="Story Category">
+              <AddStoryCategory />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/story-category/edit/:id"
+          element={
+            <PrivateRoutes title="Story Category">
+              <AddStoryCategory />
             </PrivateRoutes>
           }
         />

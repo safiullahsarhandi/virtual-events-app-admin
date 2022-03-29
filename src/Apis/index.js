@@ -13,3 +13,4 @@ export * from "./Review";
 export * from "./Order";
 export * from "./Payment";
 export * from "./Feedback";
+export * from "./StoryCategory";
