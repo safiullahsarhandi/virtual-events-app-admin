@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
+import { getDashboardData } from "../../Apis/Dashboard";
 import AppRoot from "../../Components/AppRoot";
+import { format_number } from "../../Util/helpers";
+
+import Graph from "./Graph";
 
 export default function Dashboard() {
+  const [year, setYear] = useState(new Date().getFullYear());
+
+  const { isLoading, data } = useQuery(["data", year], () =>
+    getDashboardData(year)
+  );
+
   return (
-    <AppRoot>
+    <AppRoot loading={isLoading}>
       <div className="row">
         <div className="col-12">
           <div className="card ">
@@ -18,43 +29,30 @@ export default function Dashboard() {
                       <div className="row">
                         <div className="col-lg-4 mt-1">
                           <div className="dash-card mb-0">
-                            <h5 className="card-heading">105</h5>
+                            <h5 className="card-heading">
+                              {format_number(data?.data?.total_users)}
+                            </h5>
                             <h3 className="card-number">Total Users</h3>
-                            <p className="card-percent">
-                              10%{" "}
-                              <span>
-                                <i className="fas fa-arrow-up" />
-                              </span>{" "}
-                              Since Last Week
-                            </p>
                           </div>
                         </div>
                         <div className="col-lg-4 mt-1">
                           <div className="dash-card mb-0">
-                            <h5 className="card-heading">213</h5>
+                            <h5 className="card-heading">
+                              {format_number(data?.data?.events_hosted)}
+                            </h5>
                             <h3 className="card-number">Total Events Hosted</h3>
-                            <p className="card-percent">
-                              10%{" "}
-                              <span>
-                                <i className="fas fa-arrow-up" />
-                              </span>{" "}
-                              Since Last Week
-                            </p>
                           </div>
                         </div>
                         <div className="col-lg-4 mt-1">
                           <div className="dash-card mb-0">
-                            <h5 className="card-heading">112</h5>
+                            <h5 className="card-heading">
+                              {format_number(
+                                data?.data?.subscriptions_purchased
+                              )}
+                            </h5>
                             <h3 className="card-number">
                               Total Subscriptions Purchased
                             </h3>
-                            <p className="card-percent">
-                              10%{" "}
-                              <span>
-                                <i className="fas fa-arrow-up" />
-                              </span>{" "}
-                              Since Last Week
-                            </p>
                           </div>
                         </div>
                       </div>
@@ -67,29 +65,19 @@ export default function Dashboard() {
                       <h3 className="sub-heading">Events Stats</h3>
                     </div>
                     <div className="col-lg-9">
-                      <img
-                        src="images/graph.png"
-                        alt=""
-                        className="img-fluid"
-                      />
+                      <Graph graph_data={data?.data?.event_stats} />
                     </div>
                     <div className="col-lg-3">
                       <div className="form-field">
-                        <select className="select-dropd" name id required>
-                          <option value>Year</option>
-                          <option value>2019</option>
-                          <option value>2018</option>
+                        <select
+                          className="select-dropd"
+                          value={year}
+                          onChange={(e) => setYear(e.target.value)}
+                        >
+                          {[22, 23, 24, 25, 26, 27, 28, 29, 30].map((year) => (
+                            <option value={`20${year}`}>20{year}</option>
+                          ))}
                         </select>
-                        <i
-                          className="fa fa-chevron-down right-icon select-drop"
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <div className="dash-card mt-3">
-                        <h5 className="legend-heading">Legend</h5>
-                        <ul className="legend-ul">
-                          <li>No. of Events</li>
-                        </ul>
                       </div>
                     </div>
                   </div>
@@ -100,29 +88,22 @@ export default function Dashboard() {
                       <h3 className="sub-heading">Subscription Stats</h3>
                     </div>
                     <div className="col-lg-9">
-                      <img
-                        src="images/graph.png"
-                        alt=""
-                        className="img-fluid"
+                      <Graph
+                        graph_data={data?.data?.subscription_data}
+                        label="No. Of Subscriptions"
                       />
                     </div>
                     <div className="col-lg-3">
                       <div className="form-field">
-                        <select className="select-dropd" name id required>
-                          <option value>Year</option>
-                          <option value>2019</option>
-                          <option value>2018</option>
+                        <select
+                          className="select-dropd"
+                          value={year}
+                          onChange={(e) => setYear(e.target.value)}
+                        >
+                          {[22, 23, 24, 25, 26, 27, 28, 29, 30].map((year) => (
+                            <option value={`20${year}`}>20{year}</option>
+                          ))}
                         </select>
-                        <i
-                          className="fa fa-chevron-down right-icon select-drop"
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <div className="dash-card mt-3">
-                        <h5 className="legend-heading">Legend</h5>
-                        <ul className="legend-ul">
-                          <li>No. of Events</li>
-                        </ul>
                       </div>
                     </div>
                   </div>
@@ -133,29 +114,22 @@ export default function Dashboard() {
                       <h3 className="sub-heading">Earning Stats</h3>
                     </div>
                     <div className="col-lg-9">
-                      <img
-                        src="images/graph.png"
-                        alt=""
-                        className="img-fluid"
+                      <Graph
+                        graph_data={data?.data?.earning_stats}
+                        label="GBP"
                       />
                     </div>
                     <div className="col-lg-3">
                       <div className="form-field">
-                        <select className="select-dropd" name id required>
-                          <option value>Year</option>
-                          <option value>2019</option>
-                          <option value>2018</option>
+                        <select
+                          className="select-dropd"
+                          value={year}
+                          onChange={(e) => setYear(e.target.value)}
+                        >
+                          {[22, 23, 24, 25, 26, 27, 28, 29, 30].map((year) => (
+                            <option value={`20${year}`}>20{year}</option>
+                          ))}
                         </select>
-                        <i
-                          className="fa fa-chevron-down right-icon select-drop"
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <div className="dash-card mt-3">
-                        <h5 className="legend-heading">Legend</h5>
-                        <ul className="legend-ul">
-                          <li>No. of Events</li>
-                        </ul>
                       </div>
                     </div>
                   </div>
