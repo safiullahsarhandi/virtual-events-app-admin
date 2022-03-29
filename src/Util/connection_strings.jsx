@@ -1,7 +1,7 @@
 export let connection_string;
 export let image_url;
 
-const PORT = 5151;
+const PORT = 5153;
 
 if (window.location.hostname == "localhost") {
   connection_string = `https://localhost:${PORT}/api/v1`;
