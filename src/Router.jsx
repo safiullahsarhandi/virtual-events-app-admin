@@ -30,6 +30,8 @@ import FeedbackLogs from "./Screens/Feedback/FeedbackLogs";
 import FeedbackDetails from "./Screens/Feedback/FeedbackDetails";
 import StoryCategoryLog from "./Screens/StoryCategory/StoryCategoryLog";
 import AddStoryCategory from "./Screens/StoryCategory/AddStoryCategory";
+import StoryLog from "./Screens/Story/StoryLog";
+import ViewStory from "./Screens/Story/ViewStory";
 
 export default function Router() {
   return (
@@ -250,6 +252,22 @@ export default function Router() {
           element={
             <PrivateRoutes title="Story Category">
               <AddStoryCategory />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/story/logs"
+          element={
+            <PrivateRoutes title="Stories">
+              <StoryLog />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/story/details/:id"
+          element={
+            <PrivateRoutes title="Stories">
+              <ViewStory />
             </PrivateRoutes>
           }
         />

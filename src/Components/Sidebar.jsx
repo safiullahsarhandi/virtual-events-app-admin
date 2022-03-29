@@ -46,7 +46,7 @@ export default function Sidebar() {
     {
       name: "Stories",
       image: <img src="images/stories.png" alt="" class="img-fluid mr-1" />,
-      link: "/settings",
+      link: "/story/logs",
     },
     {
       name: "Story Categories",

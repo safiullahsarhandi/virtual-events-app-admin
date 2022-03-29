@@ -10,6 +10,7 @@ import Error from "../../Components/Elements/Modals/Modal.Error";
 import Success from "../../Components/Elements/Modals/Modal.Success";
 import SubscriptionCard from "./Components/SubscriptionCard";
 import SubscriptionLogs from "./Components/SubscriptionLogs";
+import StoryTable from "../Story/StoryTable";
 
 export default function UserDetails() {
   const { id } = useParams();
@@ -152,9 +153,18 @@ export default function UserDetails() {
                           <hr />
                         </div>
                       </div>
-                      {/* SUBSCRIPTION TABLE HERE */}
                       <SubscriptionLogs user={data?.data?.user?._id} />
                     </div>
+
+                    <div className="white-div-2 mt-3">
+                      <div className="row">
+                        <div className="col-12">
+                          <h5 className="filter-heading">Stories</h5>
+                        </div>
+                      </div>
+                      <StoryTable user={data?.data?.user?._id} />
+                    </div>
+
                     <div className="white-div-2 mt-3">
                       <div className="row">
                         <div className="col-12">
