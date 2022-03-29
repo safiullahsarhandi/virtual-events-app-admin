@@ -1,7 +1,7 @@
 import React from "react";
 import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
-import { chagneStatusProduct, getProductLogs } from "../../Apis";
+import { chagneStatusProduct, orderLogs } from "../../Apis";
 import AppRoot from "../../Components/AppRoot";
 import Confirmation from "../../Components/Elements/Modals/Modal.Confirmation";
 import Error from "../../Components/Elements/Modals/Modal.Error";
@@ -10,7 +10,7 @@ import Table from "../../Components/Elements/Table/Table";
 import TableMenu from "../../Components/Elements/Table/TableMenu";
 import useFetchData from "../../Hooks/useFetchData";
 import useTableControls from "../../Hooks/useTableControls";
-import { format_date } from "../../Util/helpers";
+import { formatCurrency, format_date } from "../../Util/helpers";
 
 export default function OrderLog() {
   const {
@@ -33,25 +33,13 @@ export default function OrderLog() {
     isFetching,
     isLoading,
     data,
-    refetch,
-  } = useFetchData("product_logs", getProductLogs, [
+  } = useFetchData("order_logs", orderLogs, [
     perPage,
     search_string,
     status,
     from,
     to,
   ]);
-
-  const { mutate, isLoading: loadingStatus } = useMutation(
-    (id) => chagneStatusProduct(id),
-    {
-      onSuccess: (res) => {
-        refetch();
-        Success(res?.data?.message);
-      },
-      onError: (err) => Error(err?.response?.data?.message),
-    }
-  );
 
   return (
     <AppRoot>
@@ -67,11 +55,11 @@ export default function OrderLog() {
                 </div>
                 <Table
                   headings={[
-                    "ID",
-                    "NAME",
-                    "CATEGORY",
-                    "DATE",
+                    "ORDER ID",
+                    "TOTAL",
+                    "BILLED TO",
                     "STATUS",
+                    "DATE",
                     "ACTION",
                   ]}
                   perPage={perPage}
@@ -91,12 +79,20 @@ export default function OrderLog() {
                   status_label="Status"
                   status_options={[
                     {
-                      label: "Active",
-                      value: true,
+                      label: "Pending",
+                      value: "Pending",
                     },
                     {
-                      label: "Inactive",
-                      value: false,
+                      label: "In Process",
+                      value: "In Process",
+                    },
+                    {
+                      label: "Delivered",
+                      value: "Delivered",
+                    },
+                    {
+                      label: "Refunded",
+                      value: "Refunded",
                     },
                   ]}
                 >
@@ -104,26 +100,17 @@ export default function OrderLog() {
                     {data?.data?.logs?.docs?.map((log) => (
                       <tr>
                         <td>{log?._id}</td>
-                        <td>{log?.name}</td>
-                        <td>{log?.category?.name}</td>
+                        <td>{formatCurrency(log?.price_info?.total)}</td>
+                        <td>
+                          {log?.billing_address?.first_name}{" "}
+                          {log?.billing_address?.last_name}
+                        </td>
+                        <td>{log?.order_status}</td>
                         <td>{format_date(log?.createdAt)}</td>
-                        <td>{log?.status ? "Active" : "Inactive"}</td>
                         <td>
                           <TableMenu
-                            details_link={`/product/details/${log?._id}`}
-                            edit_link={`/product/edit/${log?._id}`}
-                            enable_edit
-                            actionFunciton={() => {
-                              Confirmation(
-                                `Are You Sure You Want To ${
-                                  log?.status ? "Block" : "Unblock"
-                                } This Product?`,
-                                "Yes",
-                                () => mutate(log?._id)
-                              );
-                            }}
-                            loading={loadingStatus}
-                            status={log?.status}
+                            details_link={`/order/details/${log?._id}`}
+                            disable_action
                           />
                         </td>
                       </tr>
