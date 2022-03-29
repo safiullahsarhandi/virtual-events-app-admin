@@ -5,7 +5,7 @@ import useFetchData from "../../../Hooks/useFetchData";
 import useTableControls from "../../../Hooks/useTableControls";
 import { formatCurrency, format_date } from "../../../Util/helpers";
 
-export default function SubscriptionLogs() {
+export default function SubscriptionLogs({ user }) {
   const {
     perPage,
     setPerPage,
@@ -29,6 +29,7 @@ export default function SubscriptionLogs() {
     search_string,
     from,
     to,
+    user,
   ]);
 
   return (

@@ -34,7 +34,7 @@ export default function Sidebar() {
     {
       name: "Payment Logs",
       image: <img src="images/payment.png" alt="" class="img-fluid mr-1" />,
-      link: "/package/logs",
+      link: "/payment/logs",
     },
     {
       name: "Subscription Plans",

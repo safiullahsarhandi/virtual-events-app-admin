@@ -11,3 +11,4 @@ export * from "./Attribute";
 export * from "./Product";
 export * from "./Review";
 export * from "./Order";
+export * from "./Payment";

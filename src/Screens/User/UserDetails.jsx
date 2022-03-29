@@ -153,7 +153,7 @@ export default function UserDetails() {
                         </div>
                       </div>
                       {/* SUBSCRIPTION TABLE HERE */}
-                      <SubscriptionLogs />
+                      <SubscriptionLogs user={data?.data?.user?._id} />
                     </div>
                     <div className="white-div-2 mt-3">
                       <div className="row">

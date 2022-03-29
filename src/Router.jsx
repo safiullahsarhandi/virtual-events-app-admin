@@ -25,6 +25,7 @@ import AddProduct from "./Screens/Product/AddProduct";
 import ViewProduct from "./Screens/Product/ViewProduct";
 import OrderLog from "./Screens/Order/OrderLog";
 import ViewOrder from "./Screens/Order/ViewOrder";
+import PaymentLog from "./Screens/Payment/PaymentLog";
 
 export default function Router() {
   return (
@@ -197,6 +198,14 @@ export default function Router() {
           element={
             <PrivateRoutes title="Orders">
               <ViewOrder />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/payment/logs"
+          element={
+            <PrivateRoutes title="Payment">
+              <PaymentLog />
             </PrivateRoutes>
           }
         />
