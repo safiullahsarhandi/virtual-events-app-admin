@@ -104,7 +104,7 @@ export default function EventCategory() {
                     {data?.data?.logs?.docs?.map((log) => (
                       <tr>
                         <td>{log?.name}</td>
-                        <td>{log?.no_stories || 0}</td>
+                        <td>{log?.no_events || 0}</td>
                         <td>{log?.status ? "Active" : "Inactive"}</td>
                         <td>
                           <TableMenu
