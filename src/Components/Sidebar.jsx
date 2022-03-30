@@ -26,11 +26,12 @@ export default function Sidebar() {
       ),
       link: "/event-category/logs",
     },
-    {
-      name: "Event Elements",
-      image: <img src="images/elements.png" alt="" class="img-fluid mr-1" />,
-      link: "/event-elements/logs",
-    },
+    // THIS HAS BEEN REMOVED
+    // {
+    //   name: "Event Elements",
+    //   image: <img src="images/elements.png" alt="" class="img-fluid mr-1" />,
+    //   link: "/event-elements/logs",
+    // },
     {
       name: "Payment Logs",
       image: <img src="images/payment.png" alt="" class="img-fluid mr-1" />,
