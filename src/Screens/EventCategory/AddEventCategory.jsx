@@ -20,7 +20,7 @@ export default function AddEventCategory() {
     id: "",
     name: "",
     cost: true,
-    onlySubscription: false,
+    inclueSubscription: false,
   });
 
   const { mutate, isLoading } = useMutation(
@@ -44,7 +44,7 @@ export default function AddEventCategory() {
           id: category?._id,
           name: category?.name,
           cost: category?.cost,
-          onlySubscription: category?.onlySubscription,
+          inclueSubscription: category?.inclueSubscription,
         });
       },
       refetchOnReconnect: false,
@@ -117,11 +117,11 @@ export default function AddEventCategory() {
                                   type="checkbox"
                                   id="c1"
                                   name="cb"
-                                  checked={info?.onlySubscription}
+                                  checked={info?.inclueSubscription}
                                   onChange={(e) =>
                                     setInfo({
                                       ...info,
-                                      onlySubscription: e.target.checked,
+                                      inclueSubscription: e.target.checked,
                                     })
                                   }
                                 />

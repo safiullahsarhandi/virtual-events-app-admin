@@ -11,6 +11,7 @@ import Success from "../../Components/Elements/Modals/Modal.Success";
 import SubscriptionCard from "./Components/SubscriptionCard";
 import SubscriptionLogs from "./Components/SubscriptionLogs";
 import StoryTable from "../Story/StoryTable";
+import EventTable from "../Event/EventTable";
 
 export default function UserDetails() {
   const { id } = useParams();
@@ -166,12 +167,7 @@ export default function UserDetails() {
                     </div>
 
                     <div className="white-div-2 mt-3">
-                      <div className="row">
-                        <div className="col-12">
-                          <h5 className="filter-heading">Events</h5>
-                        </div>
-                        {/* EVENTS TABLE HERE */}
-                      </div>
+                      <EventTable label="Events" user={data?.data?.user?._id} />
                     </div>
                   </div>
                 </div>

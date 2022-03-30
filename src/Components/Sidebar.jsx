@@ -29,7 +29,7 @@ export default function Sidebar() {
     {
       name: "Event Elements",
       image: <img src="images/elements.png" alt="" class="img-fluid mr-1" />,
-      link: "/payment/logs",
+      link: "/event-elements/logs",
     },
     {
       name: "Payment Logs",

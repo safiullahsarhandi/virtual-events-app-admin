@@ -53,3 +53,13 @@ export const getEventCategory = (id) =>
     method: "GET",
     headers: getAuthHeader(),
   });
+
+export const searchEventCategories = (searchString) =>
+  axios({
+    url: `${connection_string}/eventCategory/admin/search`,
+    method: "GET",
+    params: {
+      searchString,
+    },
+    headers: getAuthHeader(),
+  });

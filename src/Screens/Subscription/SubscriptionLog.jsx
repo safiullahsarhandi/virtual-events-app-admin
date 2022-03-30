@@ -9,33 +9,14 @@ import AddPlanModal from "./AddPlanModal";
 import SubscriptionPlanCard from "./Components/SubscriptionPlanCard";
 
 export default function SubscriptionLog() {
-  const {
-    perPage,
-    setPerPage,
-    search_string,
-    setSearchString,
-    from,
-    setFrom,
-    to,
-    setTo,
-  } = useTableControls();
+  const { perPage } = useTableControls();
 
-  const {
-    // INTERNAL EXPORTS
-    setPage,
-    // REACT QUERY EXPORTS
-    isFetching,
-    isLoading,
-    data,
-  } = useFetchData("package_logs", getPackageLogs, [
+  const { isLoading, data } = useFetchData("package_logs", getPackageLogs, [
     perPage,
-    search_string,
-    from,
-    to,
   ]);
 
   return (
-    <AppRoot>
+    <AppRoot loading={isLoading}>
       <div className="row">
         <div className="col-12 px-xl-4 pt-xl-2">
           <div className="card my-sm-5 mx-2">
