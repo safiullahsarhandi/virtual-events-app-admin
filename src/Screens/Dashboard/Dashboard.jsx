@@ -65,7 +65,10 @@ export default function Dashboard() {
                       <h3 className="sub-heading">Events Stats</h3>
                     </div>
                     <div className="col-lg-9">
-                      <Graph graph_data={data?.data?.event_stats} />
+                      <Graph
+                        graph_data={data?.data?.event_stats}
+                        label="Events"
+                      />
                     </div>
                     <div className="col-lg-3">
                       <div className="form-field">
