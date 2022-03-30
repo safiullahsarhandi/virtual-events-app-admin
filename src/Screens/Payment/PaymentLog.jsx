@@ -52,7 +52,14 @@ export default function PaymentLog() {
                         ]
                       : selected === 1
                       ? ["ORDER ID", "ORDER STATUS", "USER ID", "USER NAME"]
-                      : []
+                      : [
+                          "EVENT DATE",
+                          "EVENT TIME",
+                          "EVENT CATEGORY",
+                          "EVENT AMOUNT",
+                          "USER ID",
+                          "USER NAME",
+                        ]
                   }
                   perPage={perPage}
                   setPerPage={setPerPage}
@@ -83,7 +90,14 @@ export default function PaymentLog() {
                           <td>{log?.user?.name}</td>
                         </tr>
                       ) : (
-                        <></>
+                        <tr>
+                          <td>{format_date(log?.event?.date)}</td>
+                          <td>{log?.event?.time}</td>
+                          <td>{log?.event?.event_category?.name}</td>
+                          <td>{formatCurrency(log?.amount)}</td>
+                          <td>{log?.user?._id}</td>
+                          <td>{log?.user?.name}</td>
+                        </tr>
                       )
                     )}
                   </tbody>
