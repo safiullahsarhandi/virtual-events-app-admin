@@ -101,6 +101,7 @@ export default function Sidebar() {
           className="navigation navigation-main"
           id="main-menu-navigation"
           data-menu="menu-navigation"
+          style={{ overflow: "auto", height: "80%" }}
         >
           {menu?.current?.map((menu) => (
             <li
