@@ -15,3 +15,4 @@ export * from "./Payment";
 export * from "./Feedback";
 export * from "./StoryCategory";
 export * from "./Story";
+export * from "./EventCategory";

@@ -17,14 +17,14 @@ export default function Sidebar() {
     {
       name: "Events",
       image: <img src="images/events.png" alt="" class="img-fluid mr-1" />,
-      link: "/property/logs",
+      link: "/event/logs",
     },
     {
       name: "Event Categories",
       image: (
         <img src="images/event-categories.png" alt="" class="img-fluid mr-1" />
       ),
-      link: "/category/logs",
+      link: "/event-category/logs",
     },
     {
       name: "Event Elements",

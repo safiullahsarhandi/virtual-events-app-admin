@@ -32,6 +32,8 @@ import StoryCategoryLog from "./Screens/StoryCategory/StoryCategoryLog";
 import AddStoryCategory from "./Screens/StoryCategory/AddStoryCategory";
 import StoryLog from "./Screens/Story/StoryLog";
 import ViewStory from "./Screens/Story/ViewStory";
+import EventCategory from "./Screens/EventCategory/EventCategory";
+import AddEventCategory from "./Screens/EventCategory/AddEventCategory";
 
 export default function Router() {
   return (
@@ -268,6 +270,30 @@ export default function Router() {
           element={
             <PrivateRoutes title="Stories">
               <ViewStory />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/event-category/logs"
+          element={
+            <PrivateRoutes title="Event Category">
+              <EventCategory />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/event-category/add"
+          element={
+            <PrivateRoutes title="Event Category">
+              <AddEventCategory />
+            </PrivateRoutes>
+          }
+        />
+        <Route
+          path="/event-category/edit/:id"
+          element={
+            <PrivateRoutes title="Event Category">
+              <AddEventCategory />
             </PrivateRoutes>
           }
         />
