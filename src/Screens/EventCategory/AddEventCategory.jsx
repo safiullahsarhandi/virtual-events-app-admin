@@ -61,7 +61,7 @@ export default function AddEventCategory() {
               <div className="card-dashboard">
                 <div className="row">
                   <div className="col-12 d-flex align-items-center">
-                    <Link to="/category/logs">
+                    <Link to="/event-category/logs">
                       <i className="fas fa-chevron-left back-arrow mr-1" />
                     </Link>
                     <h5 className="main-heading d-inline-block">
@@ -77,14 +77,14 @@ export default function AddEventCategory() {
                           <div className="row align-items-center">
                             <div className="col-xl-3 mt-1">
                               <label htmlFor className="all-label">
-                                Name<span className="red">*</span>
+                                Category Name<span className="red">*</span>
                               </label>
                             </div>
                             <div className="col-xl-4 mt-xl-1">
                               <Input
                                 type="text"
                                 className="p-1 dash-input mt-1"
-                                placeholder="Enter Name"
+                                placeholder="Enter Category Name"
                                 onChange={(name) => setInfo({ ...info, name })}
                                 value={info?.name}
                               />

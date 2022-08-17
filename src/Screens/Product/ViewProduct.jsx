@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 
 import { getProductDetails, getProductReviews } from "../../Apis";
@@ -51,12 +51,12 @@ export default function ViewProduct() {
                     </h5>
                   </div>
                   <div className="col-lg-6 text-right mt-lg-0 mt-3 px-3">
-                    <a
-                      href="edit-product-details.php"
+                    <Link
+                      to={`/product/edit/${id}`}
                       className="site-btn d-inline-block"
                     >
                       Edit
-                    </a>
+                    </Link>
                   </div>
                 </div>
                 <div className="white-div mt-3 p-lg-3">

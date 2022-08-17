@@ -15,7 +15,6 @@ import EventTable from "../Event/EventTable";
 
 export default function UserDetails() {
   const { id } = useParams();
-
   const { data, isLoading, refetch } = useQuery(["user", id], () =>
     getUserDetails(id)
   );
@@ -110,7 +109,8 @@ export default function UserDetails() {
                             loading={loadingStatus}
                             onClick={() => mutate(id)}
                           >
-                            Mark as Inactive
+                            {data?.data?.user?.status ? "Mark as Inactive" : "Mark as Active"}
+                            {/* Mark as Inactive */}
                           </Button>
                         </div>
                       </div>

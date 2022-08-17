@@ -114,7 +114,7 @@ export default function EventCategory() {
                             actionFunciton={() => {
                               Confirmation(
                                 `Are You Sure You Want To ${
-                                  log?.status ? "Block" : "Unblock"
+                                  log?.status ? "Inactive" : "Active"
                                 } This Category?`,
                                 "Yes",
                                 () => mutate(log?._id)

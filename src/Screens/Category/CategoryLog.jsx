@@ -64,17 +64,17 @@ export default function CategoryLog() {
                     <h5 className="main-heading">Category Management</h5>
                   </div>
                   <div className="col-lg-6 text-right mt-2">
-                    <Link
+                    {/* <Link
                       to="/category/add/sub-category"
                       className="site-btn d-inline-block mx-1 mt-2"
                     >
                       Add Sub-Category
-                    </Link>
+                    </Link> */}
                     <Link
                       to="/category/add/main-category"
                       className="site-btn d-inline-block mx-1 mt-2"
                     >
-                      Add Main Category
+                      Add Category
                     </Link>
                   </div>
                 </div>
@@ -118,7 +118,7 @@ export default function CategoryLog() {
                       <tr>
                         <td>{log?._id}</td>
                         <td>{log?.name}</td>
-                        <td>{log?.sub_categories?.length}</td>
+                        <td>{log?.sub_categories_count}</td>
                         <td>{log?.no_products || 0}</td>
                         <td>{log?.status ? "Active" : "Inactive"}</td>
                         <td>

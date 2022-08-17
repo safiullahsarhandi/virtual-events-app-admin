@@ -19,10 +19,12 @@ import {
   getMinAttributes,
   getProductDetails,
   searchCategories,
+  searchSubCategories,
 } from "../../Apis";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import SimpleSlider from "../../Components/Elements/Carousel/SimpleSlider";
 import Confirmation from "../../Components/Elements/Modals/Modal.Confirmation";
+import { buildFormData } from "../../Util/helpers";
 
 export default function AddProduct() {
   const { id } = useParams();
@@ -37,10 +39,12 @@ export default function AddProduct() {
     about_product: "",
     attributes: [],
     images: [],
+    sub_category : {},
   });
   const [attributes, setAttributes] = useState([]);
   const [selectedAttribute, setSelectedAttribute] = useState();
   const [categories, setCategories] = useState([]);
+  const [sub_categories, setSubCategories] = useState([]);
   const [existing_images, setExistingImages] = useState([]);
 
   const editorRef = useRef(null);
@@ -58,10 +62,19 @@ export default function AddProduct() {
       refetchOnWindowFocus: false,
     }
   );
-
+  useEffect(()=> {
+    if(info?.category){
+      Promise.all([
+        handleGetSubCategories(),
+        // getSelectedSubCategory(info?.category),
+      ]);
+    }
+  },[info?.category]);
   useEffect(() => {
     if (data?.data?.product) {
       const product = data?.data?.product;
+      getSubCategories({parent : product?.category?._id});
+      
       setInfo({
         id: product?._id,
         name: product?.name,
@@ -74,6 +87,10 @@ export default function AddProduct() {
         about_product: product?.about_product,
         attributes: product?.attributes,
         images: [],
+        sub_category : {
+          label: product?.sub_category?.name,
+          value: product?.sub_category?._id,
+        },
       });
       setExistingImages(product?.images);
     }
@@ -106,8 +123,27 @@ export default function AddProduct() {
     else setCategories(data?.categories);
   };
 
+  const handleGetSubCategories = async (inputValue, callback) => {
+    const { data } = await searchSubCategories(inputValue,{parent : info?.category?.value});
+
+    if (callback) await callback(data?.sub_categories);
+    else setSubCategories(data?.sub_categories);
+  };
+
+  const getSubCategories = async (params = {},callback) => {
+    const { data } = await searchSubCategories(params);
+
+    if (callback) await callback(data?.sub_categories);
+    else setSubCategories(data?.sub_categories);
+  };
+
   const debounceLoadCategories = (inputValue, callBack) =>
     debounce(handleGetCategories(inputValue, callBack), 500, {
+      leading: true,
+    });
+
+    const debounceLoadSubCategories = (inputValue, callBack) =>
+    debounce(handleGetSubCategories(inputValue, callBack), 500, {
       leading: true,
     });
 
@@ -132,6 +168,7 @@ export default function AddProduct() {
       about_product,
       attributes,
       images,
+      sub_category
     } = info;
     let is_error = false;
     if (attributes.length === 0)
@@ -152,15 +189,13 @@ export default function AddProduct() {
       return Error("Please Select Images");
 
     const form_data = new FormData();
-    if (id) form_data.append("id", id);
-    form_data.append("name", name);
-    form_data.append("category", category?.value);
-    form_data.append("price", price);
-    form_data.append("status", status);
-    form_data.append("about_product", about_product);
-    form_data.append("attributes", JSON.stringify(attributes));
-    images?.forEach((image) => {
-      form_data.append("product_image", image);
+    
+    buildFormData(form_data,{
+      ...info,
+      category : category?.value,
+      sub_category : sub_category?.value,
+      status : (status?1:0),
+      attributes : JSON.stringify(attributes),
     });
     if (existing_images?.length > 0)
       form_data.append("existing_images", JSON.stringify(existing_images));
@@ -173,7 +208,12 @@ export default function AddProduct() {
     temp_data.splice(index, 1);
     setExistingImages(temp_data);
   };
-
+  const getSelectedSubCategory = async (id)=> {
+    console.log('info?.sub_category',info,id,sub_categories);
+    let sub_category = sub_categories?.find(category => category.value == id) || null;
+    console.log(sub_category);
+    setInfo({...info,sub_category});
+};
   return (
     <AppRoot loading={isLoading || loadingProduct}>
       <div className="row">
@@ -186,7 +226,7 @@ export default function AddProduct() {
                     <Link to="/product/logs">
                       <i className="fas fa-chevron-left back-arrow mr-1" />
                     </Link>
-                    <h5 className="main-heading d-inline-block">Add Product</h5>
+                    <h5 className="main-heading d-inline-block">{id?'Edit':'Add'} Product</h5>
                   </div>
                 </div>
                 <div className="white-div mt-3 p-lg-3">
@@ -256,6 +296,34 @@ export default function AddProduct() {
                                   }}
                                   defaultOptions={categories}
                                   value={info?.category}
+                                  styles={{
+                                    control: (styles) => ({
+                                      ...styles,
+                                      cursor: "pointer",
+                                    }),
+                                  }}
+                                  placeholder=""
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row align-items-center">
+                            <div className="col-xl-3 mt-1">
+                              <label htmlFor className="all-label">
+                                Sub Category<span className="red">*</span>
+                              </label>
+                            </div>
+                            <div className="col-xl-4 mt-xl-1">
+                              <div className="form-field mb-0">
+                                <AsyncSelect
+                                  loadOptions={(inputValue, callBack) =>
+                                    debounceLoadSubCategories(inputValue, callBack)
+                                  }
+                                  onChange={(opt) => {
+                                    setInfo({ ...info, sub_category: opt });
+                                  }}
+                                  defaultOptions={sub_categories}
+                                  value={info?.sub_category}
                                   styles={{
                                     control: (styles) => ({
                                       ...styles,

@@ -20,9 +20,9 @@ export default function FeedbackDetails() {
               <div className="card-dashboard">
                 <div className="row">
                   <div className="col-12 d-flex align-items-center">
-                    <a href="queries.php">
+                    <Link to="/feedback/logs">
                       <i className="fas fa-chevron-left back-arrow mr-1" />
-                    </a>
+                    </Link>
                     <h5 className="main-heading d-inline-block">
                       Query Details
                     </h5>

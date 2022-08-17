@@ -3,7 +3,7 @@ import {
   addCategory,
   editCateogry,
   getCategory,
-  searchSubCategories,
+  searchCategories,
 } from "../../Apis";
 import AppRoot from "../../Components/AppRoot";
 import debounce from "debounce-promise";
@@ -15,7 +15,7 @@ import Error from "../../Components/Elements/Modals/Modal.Error";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "../../Components/Elements/Form/Button";
 import Input from "../../Components/Elements/Form/Input";
-import { convertToLabelValue } from "../../Util/helpers";
+import { buildFormData, convertToLabelValue } from "../../Util/helpers";
 
 export default function AddMainCategory() {
   const navigation = useNavigate();
@@ -27,13 +27,14 @@ export default function AddMainCategory() {
     status: true,
     description: "",
     category_image: "",
-    sub_categories: [],
+    parent : '',
+    // sub_categories: [],
   });
-  const [sub_categories, setSubCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [old_sub_categories, setOldSubCategories] = useState([]);
 
   useEffect(() => {
-    handleGetSubCategories();
+    handleGetCategories();
   }, []);
 
   const { isLoading: loadingCategory } = useQuery(
@@ -48,11 +49,7 @@ export default function AddMainCategory() {
           status: category?.status,
           description: category?.description,
           category_image: category?.category_image,
-          sub_categories: convertToLabelValue(
-            category?.sub_categories,
-            "_id",
-            "name"
-          ),
+          parent : category?.parent,
         });
         setOldSubCategories(category?.sub_categories);
       },
@@ -61,15 +58,15 @@ export default function AddMainCategory() {
     }
   );
 
-  const handleGetSubCategories = async (inputValue, callback) => {
-    const { data } = await searchSubCategories(inputValue);
-
-    if (callback) await callback(data?.sub_categories);
-    else setSubCategories(data?.sub_categories);
+  const handleGetCategories = async (inputValue, callback) => {
+    const { data } = await searchCategories(inputValue);
+    // data?.categories.push({label : 'Select Category'})  
+    if (callback) await callback(data?.categories);
+     setCategories(data?.categories);
   };
 
-  const debounceLoadSubCategories = (inputValue, callBack) =>
-    debounce(handleGetSubCategories(inputValue, callBack), 500, {
+  const debounceLoadCategories = (inputValue, callBack) =>
+    debounce(handleGetCategories(inputValue, callBack), 500, {
       leading: true,
     });
 
@@ -85,32 +82,22 @@ export default function AddMainCategory() {
   );
 
   const handleSubmit = () => {
-    const { id, name, status, description, category_image, sub_categories } =
+    const { id, name, status, description, category_image, parent } =
       info;
 
-    if (sub_categories.length === 0)
-      return Error("Please Select Atleast One Sub Category");
-
-    const sub_to_send = sub_categories.map(
-      (sub_category) => sub_category.value
-    );
-
+    
+      if (!category_image && !id)
+        return Error("Please Select an image");
+    
     const form_data = new FormData();
-    form_data.append("id", id);
-    form_data.append("name", name);
-    form_data.append("status", status);
-    form_data.append("description", description);
-    form_data.append("category_image", category_image);
-    form_data.append("sub_categories", JSON.stringify(sub_to_send));
-    if (id)
-      form_data.append(
-        "old_sub_categories",
-        JSON.stringify(old_sub_categories)
-      );
+    buildFormData(form_data,{...info,status : (status?1:0)});
 
     mutate(form_data);
   };
 
+  const getParent = (id)=> {
+      return categories?.find(category => category.value == id) || null;
+  };
   return (
     <AppRoot loading={loadingCategory}>
       <div className="row">
@@ -124,7 +111,7 @@ export default function AddMainCategory() {
                       <i className="fas fa-chevron-left back-arrow mr-1" />
                     </Link>
                     <h5 className="main-heading d-inline-block">
-                      {id ? "Update" : "Add"} Categories
+                      {id ? "Update" : "Add"} Category
                     </h5>
                   </div>
                 </div>
@@ -134,12 +121,12 @@ export default function AddMainCategory() {
                       <div className="col-xl-9">
                         <form action>
                           <div className="row align-items-center">
-                            <div className="col-xl-3 mt-1">
+                            <div className="col-xl-4 mt-1">
                               <label htmlFor className="all-label">
                                 Category Title<span className="red">*</span>
                               </label>
                             </div>
-                            <div className="col-xl-4 mt-xl-1">
+                            <div className="col-xl-8 mt-xl-1">
                               <Input
                                 type="text"
                                 className="p-1 dash-input mt-1"
@@ -150,24 +137,24 @@ export default function AddMainCategory() {
                             </div>
                           </div>
                           <div className="row align-items-center">
-                            <div className="col-xl-3 mt-1">
-                              <label htmlFor className="all-label">
-                                Sub-Category<span className="red">*</span>
+                            <div className="col-xl-4 mt-1">
+                              <label htmlFor className="all-label label">
+                                Parent<span className="red">*</span>
                               </label>
                             </div>
-                            <div className="col-xl-4 mt-xl-1">
+                            <div className="col-xl-8 mt-xl-1">
                               <AsyncSelect
                                 loadOptions={(inputValue, callBack) =>
-                                  debounceLoadSubCategories(
+                                  debounceLoadCategories(
                                     inputValue,
                                     callBack
                                   )
                                 }
                                 onChange={(opt) => {
-                                  setInfo({ ...info, sub_categories: opt });
+                                  setInfo({ ...info, parent: opt?.value });
                                 }}
-                                defaultOptions={sub_categories}
-                                value={info?.sub_categories}
+                                defaultOptions={categories}
+                                value={getParent(info?.parent)}
                                 styles={{
                                   control: (styles) => ({
                                     ...styles,
@@ -175,8 +162,8 @@ export default function AddMainCategory() {
                                   }),
                                 }}
                                 placeholder=""
-                                isMulti
                               />
+                              <span>Note: Leave parent category field empty in order to add category as parent.</span>
                             </div>
                           </div>
                         </form>

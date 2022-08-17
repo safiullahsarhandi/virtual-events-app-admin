@@ -18,12 +18,13 @@ export const updateSubCategory = (data) =>
     headers: getAuthHeader(),
   });
 
-export const searchSubCategories = (searchString) =>
+export const searchSubCategories = (searchString,params = {}) =>
   axios({
     url: `${connection_string}/subCategory/admin/search`,
     method: "GET",
     params: {
       searchString,
+      ...params,
     },
     headers: getAuthHeader(),
   });

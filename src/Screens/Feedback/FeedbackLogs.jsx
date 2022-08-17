@@ -33,8 +33,7 @@ export default function FeedbackLogs() {
     from,
     to,
   ]);
-
-  useLocationTitle("Feedback");
+                                          
 
   return (
     <AppRoot>

@@ -109,7 +109,7 @@ export default function UserLog() {
                             actionFunciton={() => {
                               Confirmation(
                                 `Are You Sure You Want To ${
-                                  log?.status ? "Block" : "Unblock"
+                                  log?.status ? "Active" : "Inactive"
                                 } This User?`,
                                 "Yes",
                                 () => mutate(log?._id)
