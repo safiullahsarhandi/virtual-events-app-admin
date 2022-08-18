@@ -64,12 +64,12 @@ export default function AddProduct() {
   );
   useEffect(()=> {
     if(info?.category){
-      Promise.all([
-        handleGetSubCategories(),
-        // getSelectedSubCategory(info?.category),
-      ]);
+      setInfo({...info,sub_category : {}});
+      // info?.sub_category = {};
+      handleGetSubCategories();
     }
   },[info?.category]);
+
   useEffect(() => {
     if (data?.data?.product) {
       const product = data?.data?.product;
@@ -209,9 +209,7 @@ export default function AddProduct() {
     setExistingImages(temp_data);
   };
   const getSelectedSubCategory = async (id)=> {
-    console.log('info?.sub_category',info,id,sub_categories);
     let sub_category = sub_categories?.find(category => category.value == id) || null;
-    console.log(sub_category);
     setInfo({...info,sub_category});
 };
   return (
